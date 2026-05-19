@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart | Peptides Factory</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #0a2540;
+            --accent-color: #00d4b2;
+            --text-dark: #333;
+            --bg-light: #f8f9fa;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0; padding: 0;
+            color: var(--text-dark);
+            background-color: #fff;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%; 
+            border-bottom: 1px solid #eee;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            background: #fff;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo-img {
+            height: 90px; 
+            width: auto;
+            object-fit: contain;
+        }
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: 0.3s;
+        }
+        nav a:hover { color: var(--accent-color); }
+
+        .cart-container { 
+            max-width: 1100px; 
+            margin: 50px auto; 
+            padding: 0 20px; 
+            min-height: 400px;
+        }
+        .cart-title { 
+            color: var(--primary-color); 
+            font-size: 32px; 
+            margin-bottom: 30px; 
+            border-bottom: 2px solid #eee; 
+            padding-bottom: 10px; 
+        }
+
+        .cart-table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            margin-bottom: 40px; 
+        }
+        .cart-table th { 
+            background-color: var(--primary-color); 
+            color: white; 
+            padding: 15px; 
+            text-align: left; 
+            font-size: 16px;
+        }
+        .cart-table td { 
+            padding: 20px 15px; 
+            border-bottom: 1px solid #eee; 
+            vertical-align: middle; 
+        }
+        
+        .item-image { 
+            width: 70px; 
+            height: 70px; 
+            object-fit: contain; 
+            background: #f0f0f0; 
+            border-radius: 6px; 
+            padding: 5px; 
+        }
+        .item-details { 
+            display: flex; 
+            align-items: center; 
+            gap: 15px; 
+        }
+        .item-name { 
+            font-weight: bold; 
+            color: var(--primary-color); 
+            font-size: 16px; 
+        }
+        .item-spec { 
+            color: #666; 
+            font-size: 14px; 
+            margin-top: 4px; 
+        }
+
+        .qty-control {
+            display: flex;
+            align-items: center;
+        }
+        .qty-btn { 
+            background: #eee; 
+            border: none; 
+            padding: 5px 12px; 
+            cursor: pointer; 
+            font-size: 16px; 
+            border-radius: 4px; 
+            font-weight: bold;
+            transition: 0.2s;
+        }
+        .qty-btn:hover { background: #ddd; }
+        .qty-input { 
+            width: 40px; 
+            text-align: center; 
+            border: 1px solid #ddd; 
+            padding: 5px; 
+            margin: 0 5px; 
+            border-radius: 4px; 
+            font-size: 16px; 
+        }
+
+        .delete-btn { 
+            background: none; 
+            border: none; 
+            color: #ff4d4d; 
+            cursor: pointer; 
+            font-size: 18px; 
+            transition: 0.3s; 
+        }
+        .delete-btn:hover { 
+            color: #cc0000; 
+            transform: scale(1.1); 
+        }
+
+        .cart-summary { 
+            background: var(--bg-light); 
+            padding: 30px; 
+            border-radius: 12px; 
+            max-width: 400px; 
+            margin-left: auto; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
+        }
+        .summary-row { 
+            display: flex; 
+            justify-content: space-between; 
+            margin-bottom: 15px; 
+            font-size: 16px; 
+        }
+        .summary-total { 
+            font-size: 22px; 
+            font-weight: bold; 
+            color: var(--primary-color); 
+            border-top: 2px solid #ddd; 
+            padding-top: 15px; 
+            margin-top: 15px; 
+        }
+
+        .checkout-btn { 
+            background-color: #25D366; 
+            color: white; 
+            width: 100%; 
+            padding: 15px; 
+            border: none; 
+            border-radius: 6px; 
+            font-size: 18px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            gap: 10px; 
+            transition: 0.3s; 
+            text-decoration: none; 
+            box-sizing: border-box; 
+            margin-top: 20px; 
+        }
+        .checkout-btn:hover { 
+            background-color: #1ebd59; 
+            transform: translateY(-2px); 
+            box-shadow: 0 5px 15px rgba(37,211,102,0.3);
+        }
+
+        .empty-msg { 
+            text-align: center; 
+            padding: 60px 0; 
+        }
+        .empty-msg i { 
+            font-size: 60px; 
+            color: #ccc; 
+            margin-bottom: 20px; 
+        }
+        .empty-msg p { 
+            font-size: 18px; 
+            color: #666; 
+            margin-bottom: 25px; 
+        }
+        .shop-link { 
+            display: inline-block; 
+            background-color: var(--primary-color); 
+            color: white; 
+            padding: 12px 30px; 
+            text-decoration: none; 
+            border-radius: 5px; 
+            font-weight: bold; 
+            transition: 0.3s; 
+        }
+        .shop-link:hover { 
+            background-color: var(--accent-color); 
+            color: var(--primary-color); 
+        }
+
+        footer { 
+            background-color: #0d1117; 
+            color: #9ca3af; 
+            padding: 40px 5% 20px; 
+            font-size: 14px; 
+            text-align: center; 
+            margin-top: 100px; 
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo-container">
+            <img src="logo.png" alt="Logo" class="logo-img">
+        </a>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="index.html#shop">Shop</a>
+        </nav>
+    </header>
+
+    <div class="cart-container">
+        <h1 class="cart-title">Your Shopping Cart</h1>
+        <div id="cart-content"></div>
+    </div>
+
+    <footer>
+        <div>Copyright © 2026 Peptides Factory. All Rights Reserved.</div>
+    </footer>
+
+    <script>
+        // Load data and dynamically build the interface
+        function loadCart() {
+            let cart = JSON.parse(localStorage.getItem('peptides_cart')) || [];
+            const container = document.getElementById('cart-content');
+            
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-msg">
+                        <i class="fas fa-shopping-basket"></i>
+                        <p>Your shopping cart is empty.</p>
+                        <a href="index.html#shop" class="shop-link">Return to Shop</a>
+                    </div>
+                `;
+                return;
+            }
+            
+            let tableHTML = `
+                <table class="cart-table">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+            
+            let subtotal = 0;
+            let orderText = "Hi Peptides Factory, I would like to purchase the following items:\n\n";
+            
+            cart.forEach((item, index) => {
+                let itemTotal = item.price * item.quantity;
+                subtotal += itemTotal;
+                
+                tableHTML += `
+                    <tr>
+                        <td>
+                            <div class="item-details">
+                                <img src="${item.image}" alt="${item.name}" class="item-image">
+                                <div>
+                                    <div class="item-name">${item.name}</div>
+                                    <div class="item-spec">Specification: ${item.spec}</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>$${item.price.toFixed(2)}</td>
+                        <td>
+                            <div class="qty-control">
+                                <button class="qty-btn" onclick="updateQty(${index}, -1)">-</button>
+                                <input type="text" class="qty-input" value="${item.quantity}" readonly>
+                                <button class="qty-btn" onclick="updateQty(${index}, 1)">+</button>
+                            </div>
+                        </td>
+                        <td>$${itemTotal.toFixed(2)}</td>
+                        <td>
+                            <button class="delete-btn" onclick="deleteItem(${index})">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+                
+                orderText += `- ${item.name} (${item.spec}) x${item.quantity} -> $${itemTotal.toFixed(2)}\n`;
+            });
+            
+            tableHTML += `</tbody></table>`;
+            
+            orderText += `\nTotal Subtotal: $${subtotal.toFixed(2)}\n\nPlease process my order layout.`;
+            let whatsappUrl = `https://wa.me/85252638529?text=${encodeURIComponent(orderText)}`;
+            
+            let summaryHTML = `
+                <div class="cart-summary">
+                    <div class="summary-row"><span>Subtotal:</span><span>$${subtotal.toFixed(2)}</span></div>
+                    <div class="summary-row"><span>Shipping:</span><span style="color:#25D366; font-weight:bold;">Free Stealth Shipping</span></div>
+                    <div class="summary-row summary-total"><span>Total:</span><span>$${subtotal.toFixed(2)}</span></div>
+                    <a href="${whatsappUrl}" target="_blank" class="checkout-btn">
+                        <i class="fab fa-whatsapp" style="font-size:22px;"></i> Proceed to Checkout
+                    </a>
+                </div>
+            `;
+            
+            container.innerHTML = tableHTML + summaryHTML;
+        }
+        
+        // This function explicitly handles changing quantities (+1 or -1)
+        function updateQty(index, change) {
+            let cart = JSON.parse(localStorage.getItem('peptides_cart')) || [];
+            cart[index].quantity += change;
+            
+            if (cart[index].quantity <= 0) {
+                cart.splice(index, 1);
+            }
+            
+            localStorage.setItem('peptides_cart', JSON.stringify(cart));
+            loadCart(); // re-render layout seamlessly
+        }
+        
+        // This function handles deleting an item entirely
+        function deleteItem(index) {
+            let cart = JSON.parse(localStorage.getItem('peptides_cart')) || [];
+            cart.splice(index, 1);
+            localStorage.setItem('peptides_cart', JSON.stringify(cart));
+            loadCart();
+        }
+        
+        loadCart();
+    </script>
+</body>
+</html>
