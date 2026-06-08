@@ -62,11 +62,14 @@
         .footer-column a { color: #9ca3af; text-decoration: none; display: block; margin-bottom: 10px; }
         .disclaimer { border-top: 1px solid #30363d; padding-top: 30px; font-size: 12px; color: #6b7280; text-align: justify; }
         
+        /* 右下角双悬浮聊天按钮 */
         .social-contact-wrapper { position: fixed; bottom: 30px; right: 30px; display: flex; flex-direction: column; gap: 15px; z-index: 10000; }
         .social-btn { width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; color: white; text-decoration: none; box-shadow: 0 5px 15px rgba(0,0,0,0.3); transition: transform 0.3s ease, background-color 0.3s ease; }
         .social-btn:hover { transform: scale(1.1); }
         .tg-color { background-color: #26A5E4; }
+        .tg-color:hover { background-color: #229ED9; }
         .wa-color { background-color: #25D366; }
+        .wa-color:hover { background-color: #20BA5A; }
     </style>
 </head>
 <body>
@@ -89,14 +92,13 @@
     </header>
     
     <section class="hero-section" id="home">
-        <h1>Premium Peptides Manufacturer</h1>
-        <p>Laboratory Grade Purity | Factory-Direct Pricing | Worldwide Stealth Shipping</p>
+        <h1>Professional Peptide Manufacturer</h1>
+        <p>Laboratory Grade Purity | Factory Direct Prices | Stealth Worldwide Shipping</p>
     </section>
 
     <section class="container" id="shop">
         <h2 class="section-title">Featured Research Peptides</h2>
-        <div class="product-grid" id="main-product-grid">
-            </div>
+        <div class="product-grid" id="main-product-grid"></div>
     </section>
 
     <section class="features-section" id="lab">
@@ -155,7 +157,6 @@
 
     <script src="data.js"></script>
     <script>
-        // 内部防卡死价格区间计算器
         function calculatePriceRange(product) {
             if (!product || !product.variants || product.variants.length === 0) return "Contact Price";
             var prices = product.variants.map(function(v) { return v.price; });
@@ -170,7 +171,7 @@
             grid.innerHTML = '';
             
             if (typeof PRODUCTS_DATA === 'undefined' || !Array.isArray(PRODUCTS_DATA)) {
-                grid.innerHTML = '<p style="color:red;text-align:center;width:100%;">Data load error. Please check data.js file.</p>';
+                grid.innerHTML = '<p style="color:red;text-align:center;width:100%;">Data load error.</p>';
                 return;
             }
 
