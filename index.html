@@ -1,208 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>peptides-factory | High Purity Research Peptides Manufacturer</title>
-    <meta name="description" content="Factory-direct supplier of high-purity research peptides and lyophilized powders. 99%+ purity verified by HPLC/MS lab reports.">
-    
-    <meta property="og:title" content="peptides-factory">
-    <meta property="og:description" content="Premium research peptides with factory-direct wholesale pricing and stealth shipping.">
-    <meta property="og:image" content="logo.png">
-    <meta property="og:type" content="website">
-
+    <title>Peptides Factory</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
     <style>
-        html { scroll-behavior: smooth; scroll-padding-top: 140px; }
-        :root { --primary-color: #0a2540; --accent-color: #00d4b2; --text-dark: #333; --bg-light: #f8f9fa; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; color: var(--text-dark); background-color: #fff; }
-        .announcement-bar { background-color: var(--primary-color); color: #fff; text-align: center; padding: 10px 0; font-size: 14px; font-weight: bold; }
-        .announcement-bar a { color: var(--accent-color); text-decoration: none; }
-
-        header { display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; border-bottom: 1px solid #eee; box-shadow: 0 2px 5px rgba(0,0,0,0.05); background: #fff; position: sticky; top: 0; z-index: 100; }
-        .logo-container { display: flex; align-items: center; text-decoration: none; }
-        .logo-img { height: 90px; width: auto; object-fit: contain; }
-        nav a { margin: 0 15px; text-decoration: none; color: var(--text-dark); font-weight: 500; transition: 0.3s; }
-        nav a:hover { color: var(--accent-color); }
-        .cart-count { background: var(--accent-color); color: white; padding: 2px 6px; border-radius: 10px; font-size: 12px; font-weight: bold; margin-left: 5px; }
-
-        .hero-section { background: linear-gradient(rgba(10,37,64,0.85), rgba(10,37,64,0.85)), url('https://images.unsplash.com/photo-1532187875605-1ef6ca237b63?auto=format&fit=crop&q=80&w=1920') no-repeat center/cover; color: white; text-align: center; padding: 120px 20px; }
-        .hero-section h1 { font-size: 42px; margin-bottom: 10px; }
-        .hero-section p { font-size: 18px; opacity: 0.9; }
-
-        .container { width: 90%; margin: 60px auto; }
-        .section-title { text-align: center; margin-bottom: 50px; font-size: 32px; color: var(--primary-color); }
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
-        .product-card { border: 1px solid #e1e1e1; border-radius: 12px; padding: 25px; text-align: center; transition: 0.4s; background: #fff; display: flex; flex-direction: column; }
-        .product-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
-        .product-link { text-decoration: none; color: inherit; display: block; cursor: pointer; margin-bottom: 20px; }
-        .product-img { width: 100%; height: 220px; background-color: #f0f0f0; margin-bottom: 20px; border-radius: 8px; display:flex; align-items:center; justify-content:center; overflow: hidden; }
-        .product-img img { width: 100%; height: 100%; object-fit: contain; transition: transform 0.4s ease; }
-        .product-card:hover .product-img img { transform: scale(1.08); }
-        .product-title { font-size: 20px; margin: 15px 0 10px; font-weight: bold; color: var(--primary-color); }
-        .product-price { color: #555; font-weight: 600; font-size: 18px; margin: 0; }
-        
-        .inquiry-btn { background-color: var(--primary-color); color: white; padding: 12px 25px; border: none; border-radius: 5px; cursor: pointer; text-decoration: none; display: block; width: 100%; font-size: 16px; font-family: inherit; font-weight: bold; transition: 0.3s; margin-top: auto; box-sizing: border-box; }
-        .inquiry-btn:hover { background-color: var(--accent-color); color: var(--primary-color); }
-
-        .features-section { background-color: var(--bg-light); padding: 80px 5%; }
-        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
-        .feature-box { background: white; padding: 35px; border-radius: 10px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        .feature-box h3 { color: var(--primary-color); margin-bottom: 15px; font-size: 22px; }
-
-        .contact-icons-only { display: flex; justify-content: center; gap: 30px; margin-top: 20px; }
-        .contact-icons-only a { font-size: 32px; transition: 0.3s; text-decoration: none; }
-        .contact-icons-only a:hover { transform: scale(1.2); }
-        .contact-icons-only .fa-envelope { color: #00d4b2; } 
-        .contact-icons-only .fa-discord { color: #5865F2; }  
-        .contact-icons-only .fa-whatsapp { color: #25D366; } 
-
-        footer { background-color: #0d1117; color: #9ca3af; padding: 60px 5% 30px; font-size: 14px; }
-        .footer-content { display: flex; justify-content: space-between; flex-wrap: wrap; margin-bottom: 40px; }
-        .footer-column { flex: 1; min-width: 250px; margin-bottom: 30px; padding-right: 20px; }
-        .footer-column h4 { color: white; margin-bottom: 20px; font-size: 18px; }
-        .footer-column a { color: #9ca3af; text-decoration: none; display: block; margin-bottom: 10px; }
-        .disclaimer { border-top: 1px solid #30363d; padding-top: 30px; font-size: 12px; color: #6b7280; text-align: justify; }
-        
-        .social-contact-wrapper { position: fixed; bottom: 30px; right: 30px; display: flex; flex-direction: column; gap: 15px; z-index: 10000; }
-        .social-btn { width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; color: white; text-decoration: none; box-shadow: 0 5px 15px rgba(0,0,0,0.3); transition: transform 0.3s ease, background-color 0.3s ease; }
-        .social-btn:hover { transform: scale(1.1); }
-        .tg-color { background-color: #26A5E4; }
-        .tg-color:hover { background-color: #229ED9; }
-        .wa-color { background-color: #25D366; }
-        .wa-color:hover { background-color: #20BA5A; }
-        .float-btn { display: none !important; }
+        :root { --main: #0a2540; --accent: #00d4b2; }
+        body { font-family: sans-serif; margin: 0; background: #fff; }
+        header { display: flex; justify-content: space-between; align-items: center; padding: 10px 5%; border-bottom: 1px solid #eee; }
+        .logo { height: 60px; }
+        .hero { background: var(--main); color: #white; text-align: center; padding: 60px 20px; color: white; }
+        .container { width: 90%; margin: 40px auto; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .card { border: 1px solid #eee; border-radius: 8px; padding: 15px; text-align: center; }
+        .card img { width: 100%; height: 180px; object-fit: contain; margin-bottom: 10px; }
+        .price { color: #666; font-weight: bold; margin: 10px 0; }
+        .btn { background: var(--main); color: #white; display: block; padding: 10px; text-decoration: none; border-radius: 4px; color: white; font-weight: bold; }
     </style>
 </head>
 <body>
 
-    <div class="announcement-bar">
-        Join our Discord community for exclusive HPLC reports & bulk discounts! 
-        <a href="https://discord.gg/aBwykq6pZ" target="_blank">JOIN NOW ✈️</a>
-    </div>
+<header>
+    <img src="logo.png" class="logo">
+    <nav>
+        <a href="cart.html" style="text-decoration:none; color:black;"><i class="fas fa-shopping-cart"></i> 购物车</a>
+    </nav>
+</header>
 
-    <header>
-        <a href="#home" class="logo-container"><img src="logo.png" alt="Logo" class="logo-img"></a>
-        <nav>
-            <a href="#home">首页</a>
-            <a href="#shop">商店</a>
-            <a href="#lab">实验室报告</a>
-            <a href="#about">关于我们</a>
-            <a href="#contact">联系我们</a>
-            <a href="cart.html" id="nav-cart"><i class="fas fa-shopping-cart"></i> 购物车 <span class="cart-count" id="cart-count">0</span></a>
-        </nav>
-    </header>
-    
-    <section class="hero-section" id="home">
-        <h1>专业肽类制造商</h1>
-        <p>实验室级纯度 | 厂家直销价格 | 全球隐秘配送</p>
-    </section>
+<div class="hero">
+    <h1>专业肽类制造商</h1>
+    <p>实验室级纯度 | 厂家直销价格</p>
+</div>
 
-    <section class="container" id="shop">
-        <h2 class="section-title">特色研究肽</h2>
-        <div class="product-grid" id="main-product-grid"></div>
-    </section>
-
-    <section class="features-section" id="lab">
-        <h2 class="section-title">为什么选择与我们合作？</h2>
-        <div class="features-grid">
-            <div class="feature-box"><h3>纯度99%以上</h3><p>每一批产品都经过高效液相色谱和质谱分析验证，以确保达到您实验室的最高研究标准。</p></div>
-            <div class="feature-box"><h3>安全支付</h3><p>我们接受比特币（BTC）、USDT、Wise和银行电汇（T/T）。保证交易安全保密。</p></div>
-            <div class="feature-box"><h3>隐秘配送</h3><p>先进的隐蔽包装，在美国、欧盟和英国的海关清关成功率达 100%。</p></div>
+<div class="container">
+    <h2 style="text-align:center;">特色研究肽</h2>
+    <div class="grid" id="product-grid">
         </div>
-    </section>
+</div>
 
-    <footer id="contact">
-        <div class="footer-content">
-            <div class="footer-column">
-                <h4>About Peptides Factory</h4>
-                <p>Leading supplier of high-quality research peptides and API intermediates since 2018. We focus on providing high-purity products for the global scientific community.</p>
-            </div>
-            <div class="footer-column">
-                <h4>Quick Links</h4>
-                <a href="#shop">Shop Products</a><a href="#lab">Lab Reports</a><a href="#">Shipping Policy</a><a href="#">Privacy Policy</a>
-            </div>
-            <div class="footer-column" style="text-align: center;">
-                <h4>Contact Us</h4>
-                <div class="contact-icons-only">
-                    <a href="mailto:iajsh3657@gmail.com" title="Email Us"><i class="fas fa-envelope"></i></a>
-                    <a href="https://discord.gg/aBwykq6pZ" target="_blank" title="Join Discord"><i class="fab fa-discord"></i></a>
-                    <a href="https://wa.me/85252638529" target="_blank" title="WhatsApp Us"><i class="fab fa-whatsapp"></i></a>
+<script src="data.js"></script>
+<script>
+    window.onload = function() {
+        const grid = document.getElementById('product-grid');
+        
+        if (typeof PRODUCTS_DATA === 'undefined') {
+            grid.innerHTML = "<p style='color:red;'>错误：无法读取 data.js。请检查文件名是否正确且已上传到 GitHub。</p>";
+            return;
+        }
+
+        PRODUCTS_DATA.forEach(product => {
+            const price = typeof getPriceRange === 'function' ? getPriceRange(product) : "Price on request";
+            grid.innerHTML += `
+                <div class="card">
+                    <img src="${product.image}" onerror="this.src='logo.png'">
+                    <h3>${product.name}</h3>
+                    <div class="price">${price}</div>
+                    <a href="product.html?id=${product.id}" class="btn">Select Options</a>
                 </div>
-            </div>
-        </div>
-        <div class="disclaimer">
-            <strong>IMPORTANT DISCLAIMER:</strong> <br>All products listed on this website are strictly for <strong>RESEARCH AND DEVELOPMENT PURPOSES ONLY</strong>.
-        </div>
-    </footer>
-
-    <div class="social-contact-wrapper">
-        <a href="https://t.me/PeptidesIris" class="social-btn tg-color" target="_blank">
-            <i class="fab fa-telegram-plane"></i>
-        </a>
-        <a href="https://wa.me/85252638529" class="social-btn wa-color" target="_blank">
-            <i class="fab fa-whatsapp"></i>
-        </a>
-    </div>
-
-    <script src="data.js"></script>
-    <script>
-        // 内部防卡死价格区间计算器
-        function calculatePriceRange(product) {
-            if (!product || !product.variants || product.variants.length === 0) return "Contact Price";
-            var prices = product.variants.map(function(v) { return v.price; });
-            var min = Math.min.apply(null, prices);
-            var max = Math.max.apply(null, prices);
-            return min === max ? "$" + min.toFixed(2) : "$" + min.toFixed(2) + " – $" + max.toFixed(2);
-        }
-
-        function renderProductsList() {
-            var grid = document.getElementById('main-product-grid');
-            if (!grid) return;
-            grid.innerHTML = '';
-            
-            if (typeof PRODUCTS_DATA === 'undefined' || !Array.isArray(PRODUCTS_DATA)) {
-                grid.innerHTML = '<p style="color:red;text-align:center;width:100%;">Data missing. Check data.js structure.</p>';
-                return;
-            }
-
-            PRODUCTS_DATA.forEach(function(product) {
-                var priceText = calculatePriceRange(product);
-                var imgFile = product.image ? product.image : 'logo.png';
-                
-                grid.innerHTML += `
-                    <div class="product-card">
-                        <a href="product.html?id=${product.id}" class="product-link">
-                            <div class="product-img">
-                                <img src="${imgFile}" alt="${product.name}" onerror="this.src='logo.png'">
-                            </div>
-                            <div class="product-title">${product.name}</div>
-                            <div class="product-price">${priceText}</div>
-                        </a>
-                        <a href="product.html?id=${product.id}" class="inquiry-btn">
-                            <i class="fas fa-list"></i> Select Options
-                        </a>
-                    </div>
-                `;
-            });
-        }
-
-        function updateCartCount() {
-            try {
-                var cart = JSON.parse(localStorage.getItem('peptides_cart')) || [];
-                var totalItems = cart.reduce(function(sum, item) { return sum + (parseInt(item.quantity) || 0); }, 0);
-                var countEl = document.getElementById('cart-count');
-                if (countEl) countEl.textContent = totalItems;
-            } catch(e) {
-                console.log(e);
-            }
-        }
-
-        document.addEventListener("DOMContentLoaded", function() {
-            renderProductsList();
-            updateCartCount();
+            `;
         });
-    </script>
+    };
+</script>
+
 </body>
 </html>
