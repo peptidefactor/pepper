@@ -70,7 +70,43 @@
         .footer-column h4 { color: white; margin-bottom: 20px; font-size: 18px; }
         .footer-column a { color: #9ca3af; text-decoration: none; display: block; margin-bottom: 10px; }
         .disclaimer { border-top: 1px solid #30363d; padding-top: 30px; font-size: 12px; color: #6b7280; text-align: justify; }
-        .float-btn { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; border-radius: 50%; background: #25D366; color: white; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); z-index: 9999; text-decoration: none; }
+        
+        /* 社交按钮组合容器 */
+        .social-contact-wrapper {
+            position: fixed;
+            bottom: 30px;
+            right: 30px; 
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 10000;
+        }
+
+        .social-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            color: white;
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .social-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .tg-color { background-color: #26A5E4; }
+        .tg-color:hover { background-color: #229ED9; }
+        
+        .wa-color { background-color: #25D366; }
+        .wa-color:hover { background-color: #20BA5A; }
+
+        .float-btn { display: none !important; }
     </style>
     <meta name="google-site-verification" content="4bALlEtLjjrSW73cVDcAl1pXg-N04k3dNQ-4sq15fXU" /> 
 </head>
@@ -136,75 +172,52 @@
         </div>
     </footer>
 
-    <!-- 社交按钮组合容器 -->
     <div class="social-contact-wrapper">
-        <!-- Telegram 按钮 -->
         <a href="https://t.me/PeptidesIris" class="social-btn tg-color" target="_blank" aria-label="Contact us on Telegram">
             <i class="fab fa-telegram-plane"></i>
         </a>
-        <!-- WhatsApp 按钮 -->
         <a href="https://wa.me/85252638529" class="social-btn wa-color" target="_blank" aria-label="Contact us on WhatsApp">
             <i class="fab fa-whatsapp"></i>
         </a>
     </div>
 
-    <style>
-        /* 1. 容器：控制整体位置 */
-        .social-contact-wrapper {
-            position: fixed;
-            bottom: 30px; /* 距离底部距离 */
-            right: 30px;  /* 距离右侧距离 */
-            display: flex;
-            flex-direction: column; /* 垂直排列 */
-            gap: 15px; /* 两个图标之间的间距 */
-            z-index: 10000; /* 确保在最上层 */
-        }
-
-        /* 2. 通用按钮样式 */
-        .social-btn {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 30px;
-            color: white;
-            text-decoration: none;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            transition: transform 0.3s ease, background-color 0.3s ease;
-        }
-
-        /* 3. 悬停效果 */
-        .social-btn:hover {
-            transform: scale(1.1);
-        }
-
-        /* 4. 各自的颜色 */
-        .tg-color { background-color: #26A5E4; }
-        .tg-color:hover { background-color: #229ED9; }
-        
-        .wa-color { background-color: #25D366; }
-        .wa-color:hover { background-color: #20BA5A; }
-
-        /* 5. 隐藏掉旧的样式，防止干扰 (可选) */
-        .float-btn { display: none !important; }
-    </style>
-
     <script src="data.js"></script>
     <script>
-        // 保持原有的渲染逻辑不变
         function renderProductsList() {
             const grid = document.getElementById('main-product-grid');
             if (!grid) return;
             grid.innerHTML = '';
+            
+            // 确保数据加载成功
+            if (typeof PRODUCTS_DATA === 'undefined' || !Array.isArray(PRODUCTS_DATA)) {
+                console.error("Error: PRODUCTS_DATA source is not loaded properly from data.js");
+                grid.innerHTML = '<p style="text-align:center; color:red; width:100%;">Data load error. Please refresh page.</p>';
+                return;
+            }
+
             PRODUCTS_DATA.forEach(product => {
+                // 安全机制 1: 防御未定义或被删除的 priceRange 字段
+                let displayPrice = product.priceRange;
+                if (!displayPrice && product.variants && product.variants.length > 0) {
+                    const prices = product.variants.map(v => v.price);
+                    const min = Math.min(...prices);
+                    const max = Math.max(...prices);
+                    displayPrice = min === max ? `$${min.toFixed(2)}` : `$${min.toFixed(2)} – $${max.toFixed(2)}`;
+                } else if (!displayPrice) {
+                    displayPrice = "Contact for Price";
+                }
+
+                // 安全机制 2: 防止图片变量为空
+                let itemImage = product.image ? product.image : 'logo.png';
+
                 grid.innerHTML += `
                     <div class="product-card">
                         <a href="product.html?id=${product.id}" class="product-link">
-                            <div class="product-img"><img src="${product.image}" alt="${product.name}"></div>
-                            <div class="product-title">${product.name}</div>
-                            <div class="product-price">${product.priceRange}</div>
+                            <div class="product-img">
+                                <img src="${itemImage}" alt="${product.name || 'Peptide'}" onerror="this.src='logo.png'">
+                            </div>
+                            <div class="product-title">${product.name || 'Unknown Product'}</div>
+                            <div class="product-price">${displayPrice}</div>
                         </a>
                         <a href="product.html?id=${product.id}" class="inquiry-btn">
                             <i class="fas fa-list"></i> Select Options
@@ -213,15 +226,19 @@
                 `;
             });
         }
-        renderProductsList();
 
         function updateCartCount() {
             let cart = JSON.parse(localStorage.getItem('peptides_cart')) || [];
-            let totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            let totalItems = cart.reduce((sum, item) => sum + (parseInt(item.quantity) || 0), 0);
             const countEl = document.getElementById('cart-count');
             if (countEl) countEl.textContent = totalItems;
         }
-        updateCartCount();
+
+        // 初始化网页
+        document.addEventListener("DOMContentLoaded", () => {
+            renderProductsList();
+            updateCartCount();
+        });
     </script>
 </body>
 </html>
