@@ -236,7 +236,37 @@
 
         // 初始化网页
         document.addEventListener("DOMContentLoaded", () => {
-            renderProductsList();
+            function renderProductsList() {
+    const grid = document.getElementById('main-product-grid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    
+    // 确保数据加载成功
+    if (typeof PRODUCTS_DATA === 'undefined' || !Array.isArray(PRODUCTS_DATA)) {
+        console.error("Error: PRODUCTS_DATA 无法从 data.js 加载");
+        return;
+    }
+
+    PRODUCTS_DATA.forEach(product => {
+        // 【关键修改点】：调用 data.js 里的 getPriceRange 函数动态获取价格，告别 undefined！
+        const displayPrice = getPriceRange(product);
+
+        grid.innerHTML += `
+            <div class="product-card">
+                <a href="product.html?id=${product.id}" class="product-link">
+                    <div class="product-img">
+                        <img src="${product.image}" alt="${product.name}" onerror="this.src='logo.png'">
+                    </div>
+                    <div class="product-title">${product.name}</div>
+                    <div class="product-price">${displayPrice}</div>
+                </a>
+                <a href="product.html?id=${product.id}" class="inquiry-btn">
+                    <i class="fas fa-list"></i> Select Options
+                </a>
+            </div>
+        `;
+    });
+};
             updateCartCount();
         });
     </script>
