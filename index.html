@@ -82,12 +82,14 @@
     <header>
         <a href="#home" class="logo-container"><img src="logo.png" alt="Logo" class="logo-img"></a>
         <nav>
-            <a href="#home">Home</a>
-            <a href="#shop">Shop</a>
-            <a href="#lab">Lab Reports</a>
-            <a href="#about">About Us</a>
-            <a href="#contact">Contact Us</a>
-            <a href="cart.html" id="nav-cart"><i class="fas fa-shopping-cart"></i> Cart <span class="cart-count" id="cart-count">0</span></a>
+            <a href="#home" style="transition: 0.3s;">Home</a>
+            <a href="#shop" style="transition: 0.3s;">Shop</a>
+            <a href="#lab" style="transition: 0.3s;">Lab Reports</a>
+            <!-- 核心修改：让 About Us 能够准确锚定到底部介绍的 id="about" 区域 -->
+            <a href="#about" style="transition: 0.3s;">About Us</a>
+            <!-- 核心修改：让 Contact Us 能够准确锚定到底部页脚的 id="contact" 区域 -->
+            <a href="#contact" style="transition: 0.3s;">Contact Us</a>
+            <a href="cart.html" id="nav-cart" style="transition: 0.3s;"><i class="fas fa-shopping-cart"></i> Cart <span class="cart-count" id="cart-count">0</span></a>
         </nav>
     </header>
     
