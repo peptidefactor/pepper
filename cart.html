@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Cart | Peptides Factory</title>
+    
+    <!-- 关键修复：加入 Canonical 标签，告诉 Google 此页面的标准唯一网址 -->
+    <link rel="canonical" href="https://peptidefactor.github.io/pepper/cart.html" />
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
@@ -248,7 +252,6 @@
     </footer>
 
     <script>
-        // Load data and dynamically build the interface
         function loadCart() {
             let cart = JSON.parse(localStorage.getItem('peptides_cart')) || [];
             const container = document.getElementById('cart-content');
@@ -335,7 +338,6 @@
             container.innerHTML = tableHTML + summaryHTML;
         }
         
-        // This function explicitly handles changing quantities (+1 or -1)
         function updateQty(index, change) {
             let cart = JSON.parse(localStorage.getItem('peptides_cart')) || [];
             cart[index].quantity += change;
@@ -345,10 +347,9 @@
             }
             
             localStorage.setItem('peptides_cart', JSON.stringify(cart));
-            loadCart(); // re-render layout seamlessly
+            loadCart();
         }
         
-        // This function handles deleting an item entirely
         function deleteItem(index) {
             let cart = JSON.parse(localStorage.getItem('peptides_cart')) || [];
             cart.splice(index, 1);
