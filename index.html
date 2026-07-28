@@ -6,6 +6,15 @@
     <title>Peptides Factory | Premium Research Peptides Manufacturer & Bulk Supply</title>
     <meta name="description" content="Premium factory-direct supplier of high-purity research peptides. Offering single vials, flexible kits, and bulk wholesale with 99%+ verified HPLC/MS reports. Secure global shipping with customs guarantee.">
     
+    <!-- 关键修复：加入 Canonical 标签，告诉 Google 此页面的标准唯一网址 -->
+    <link rel="canonical" href="https://peptidefactor.github.io/pepper/" />
+    
+    <!-- Open Graph 标签（提升 Telegram/WhatsApp 分享时的预览卡片效果） -->
+    <meta property="og:title" content="Peptides Factory | Premium Research Peptides Manufacturer">
+    <meta property="og:description" content="Premium factory-direct supplier of high-purity research peptides. 99%+ Verified HPLC/MS Reports.">
+    <meta property="og:url" content="https://peptidefactor.github.io/pepper/">
+    <meta property="og:type" content="website">
+
     <meta name="google-site-verification" content="4bALlEtLjjrSW73cVDcAl1pXg-N04k3dNQ-4sq15fXU" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
@@ -87,9 +96,7 @@
             <a href="#home" style="transition: 0.3s;">Home</a>
             <a href="#shop" style="transition: 0.3s;">Shop</a>
             <a href="#lab" style="transition: 0.3s;">Lab Reports</a>
-            <!-- 核心修改：让 About Us 能够准确锚定到底部介绍的 id="about" 区域 -->
             <a href="#about" style="transition: 0.3s;">About Us</a>
-            <!-- 核心修改：让 Contact Us 能够准确锚定到底部页脚的 id="contact" 区域 -->
             <a href="#contact" style="transition: 0.3s;">Contact Us</a>
             <a href="cart.html" id="nav-cart" style="transition: 0.3s;"><i class="fas fa-shopping-cart"></i> Cart <span class="cart-count" id="cart-count">0</span></a>
         </nav>
@@ -189,7 +196,6 @@
             return min === max ? "$" + min.toFixed(2) : "$" + min.toFixed(2) + " – $" + max.toFixed(2);
         }
 
-        // 优化8：按钮改回更柔和、包容性更强的 “Select Options” 或 “View Details”，兼顾零售加购与批发询盘
         function renderProductsList() {
             var grid = document.getElementById('main-product-grid');
             if (!grid) return;
